@@ -24,132 +24,115 @@
 </div>
 
 <!--new window goes here-->
-<div id="window-beta" class="retro-window hidden"> 
-<div class="header"><!--this is the header class-->
-    <span class="window-title">Post Mortem Protocol</span><!--span is inline so takes the entire width then having a whole block 
-    to itself-->
-    <span class="window-close">-</span>
-</div><!--end of header class-->
-<p class="headline">Awaiting biometric submissions... </p>
-<p class="ask">Enter the metrics below to run the post mortem analysis report</p>
+<!--new window goes here-->
+<div id="window-beta" class="retro-window hidden">  
+    <div class="window-header">
+        <span class="window-title">Post Mortem Protocol</span>
+        <span class="window-close">-</span>
+    </div>
+    
+    <div class="window-body">
+        <p class="headline">Awaiting biometric submissions...</p>
+        <p class="ask">Enter the metrics below to run the post mortem analysis report</p>
 
-<form action= "/calculate" method="POST"> <!--connecting to the spring web controller we made-->
-<div class="form-group">
-    <label for="VictimName">Victim Name: </label>
-    <input type="text" id="victimName" name="victimName" required placeholder="e.g: Olly Doe">
+        <form action="/calculate" method="POST"> 
+            <div class="form-group">
+                <label for="victimName">Victim Name: </label>
+                <input type="text" id="victimName" name="victimName" required placeholder="e.g: Olly Doe">
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="notSure" name="isBodyTempRange" onchange="toggleTempInput()">
+                    Not sure of body temperature
+                </label>
+            </div>
+
+            <div id="rangeInput" style="display:none;"> 
+                <label for="minBodyTemp">Minimum Body Temperature: </label>
+                <input type="number" id="minBodyTemp" name="minBodyTemp" required th:value="${bodyMinTemp}">
+
+                <label for="maxBodyTemp">Maximum Body Temperature: </label>
+                <input type="number" id="maxBodyTemp" name="maxBodyTemp" required th:value="${bodyMaxTemp}">
+            </div>
+
+            <div id="singleValue">
+                <label for="singleBodyTemp">Body Temperature: </label>
+                <input type="number" step="0.1" id="singleBodyTemp" name="singleBodyTemp" required th:value="${bodyTemp}">  
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="notSureRange" name="isAmbienttempRange" onchange="toggleAmbientRange()">
+                    Not sure of the ambient Temperature 
+                </label>
+            </div> 
+
+            <div class="ambientRange" id="ambientRange" style="display:none;"> 
+                <label for="minAmbient">Minimum Ambient Temperature: </label>
+                <input type="number" step="0.1" id="minAmbient" name="minAmbient" required th:value="${minAmbientTemp}">
+
+                <label for="maxAmbient">Maximum Ambient Temperature: </label>
+                <input type="number" step="0.1" id="maxAmbient" name="maxAmbient" required th:value="${maxAmbientTemp}">
+            </div>
+
+            <div id="singleBitchAmbient">
+                <label for="singleAmbient">Ambient Temperature: </label>
+                <input type="number" step="0.1" name="singleAmbient" id="singleAmbient" required th:value="${singleAmbient}">
+            </div>
+
+            <div class="form-group">
+                <label for="livorColor">Livor Color: </label>
+                <input type="text" id="livorColor" name="livorColor" required placeholder="e.g. Purple">
+            </div>
+
+            <div class="form-group">
+                <label for="isLivorFixed">Is Livor Fixed: </label>
+                <select id="isLivorFixed" name="isLivorFixed">
+                    <option value="true">YES</option>
+                    <option value="false">NO</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="rigorJaw">Rigor Stage - Jaw</label>
+                <select id="rigorJaw" name="rigor0">
+                    <option value="0">0 - Absent</option>
+                    <option value="1">1 - Minimal/Settling</option>
+                    <option value="2">2 - Moderate/Developing</option>
+                    <option value="3">3 - Fully rigid/Peak</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="rigorArm">Rigor Stage - Arms</label>
+                <select id="rigorArm" name="rigor1">
+                    <option value="0">0 - Absent</option>
+                    <option value="1">1 - Minimal/Settling</option>
+                    <option value="2">2 - Moderate/Developing</option>
+                    <option value="3">3 - Fully rigid/Peak</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="rigorlegs">Rigor Stage - Legs</label>
+                <select id="rigorlegs" name="rigor2">
+                    <option value="0">0 - Absent</option>
+                    <option value="1">1 - Minimal/Settling</option>
+                    <option value="2">2 - Moderate/Developing</option>  
+                    <option value="3">3 - Fully rigid/Peak</option>
+                </select>
+            </div>
+
+            <button type="submit">Run Analysis Report</button>
+        </form>
+
+        <div class="result" th:if="${report}">
+            <h2>Analysis Report</h2>
+            <pre th:text="${report}"></pre>
+        </div>
+    </div>
 </div>
-
-<!--since thymleaf cannot see what happens when the user clicks yes or no, I would have to do 
-javascript and create a box.-->
-<div class="form-group">
-   <label>
-<input type="checkBox" id="notSure" name="isBodyTempRange" onchange="toggleTempInput()">
-    Not sure of body temperature
-   </label>
-</div>
-
-<!--if they fucking click on that checkbox -->
-<div id="rangeInput" style="display:none;"> <!--since its display is none, its hidden -->
-    <label for="minBodyTemp">Minimum Body Temperature: </label>
-    <input type="number"id="minBodyTemp" name="minBodyTemp" required th:value="${bodyMinTemp}">
-
-    <label for="maxBodyTemp">Maximum Body Temperature: </label>
-    <input type="number"id="maxBodyTemp" name="maxBodyTemp" required th:value="${bodyMaxTemp}">
-
-</div>
-<!--if they know it, they can just type in the number instead of clicking
-the label box will always be present because its style: display is not hidden
--->
-
-<div id="singleValue">
-<label for="singleBodyTemp"> Body Temperature: </label>
-<input type="number" step="0.1" id="singleBodyTemp" name="singleBodyTemp" required th:value="${bodyTemp}"> 
-</div><!--close the tags immediately after you create one-->
-<!--step: 0.1 is to tell we can have decimal values for temp-->
-<!--end of the body Temp label!-->
-
-
-<!--since ambient temp can also have a range so we can do the same thing-->
-<div class=form-group>
-    <label>
-        <input type="checkBox" id="notSureRange" name="isAmbienttempRange" onchange="toggleAmbientRange()">
-        Not sure of the ambient Temperature 
-    </label>
-</div> <!--the checkbox is completed here-->
-
-<!--first do the yes scenario which is hidden and only appear when you click on the checkboc unlike the single body temp
-label because we dont want it hidden as it is the first priority
--->
-
-<div class="ambientRange" id="ambientRange" style="display:none;"> <!--since it will be usde by js, use id so thats its unique-->
-    <label for="minAmbient"> Minimum Ambient Temperature: </label>
-    <input type="number" step="0.1" id="minAmbient" name="minAmbient" required th:value="${minAmbientTemp}">
-
-    <label for="maxAmbient"> Maximum Ambient Temperature: </label>
-    <input type="number" step="0.1" id="maxAmbient" name="maxAmbient" required th:value="${maxAmbientTemp}">
-</div>
-
-<div id="singleBitchAmbient">
-<label for="singleAmbient"> Ambient Temperature: </label>
-<input type="number" step="0.1" name="singleAmbient" id="singleAmbient" required th:value="${singleAmbient}">
-</div>
-
-<!--ending of ambient range temp-->
-
-<div class="form-group">
-    <label for="livorColor"> livor Color: </label>
-    <input type="text" id="livorColor" name="livorColor" required placeholder="e.g. Purple">
-</div>
-
-<div class="form-group">
-    <label th:for="isLivorFixed"> is Livor Fixed: </label>
-    <select id="isLivorFixed" name="isLivorFixed">
-        <option value="true">YES</option>
-        <option value="false">NO</option>
-    </select>
-</div>
-
-<div class="form-group">
-    <label th:for="rigorJaw"> Rigor Stage - Jaw </label>
-    <select id="rigorJaw" name="rigor0">
-        <option value="0">0 - Absent</option>
-        <option value="1">1 - Minimal/Settling</option>
-        <option value="2">2 - Moderate/Developing</option>
-        <option value="3">3 - Fully rigid/Peak</option>
-        </select>
-</div>
-
-<div class="form-group">
-    <label th:for="rigorArms"> Rigor Stage - Arms </label>
-    <select id="rigorArm" name="rigor1">
-        <option value="0">0 - Absent</option>
-        <option value="1">1 - Minimal/Settling</option>
-        <option value="2">2 - Moderate/Developing</option>
-        <option value="3">3 - Fully rigid/Peak</option>
-        </select>
-</div>
-
-<div class="form-group">
-    <label th:for="rigorLegs"> Rigor Stage - Legs </label>
-    <select id="rigorlegs" name="rigor2">
-    <option value="0">0 - Absent</option>
-    <option value="1">1 - Minimal/Settling</option>
-    <option value="2">2 - Moderate/Developing</option> 
-    <option value="3">3 - Fully rigid/Peak</option>
-    </select>
-</div>
-
-<button type="submit"> Run Analysis Report </button>
-</form>
-
-
-<div class="result" th:if="${report}">
-    <h2>Analysis Report </h2>
-    <pre th:text="${report}">
-    </pre>
-
-</div><!--end of the whole window-->
-</div><!--end of master class-->
 
 
 <script>
