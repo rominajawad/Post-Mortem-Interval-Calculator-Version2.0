@@ -18,24 +18,24 @@ public class ForensicWebControllerVersion2{
     @PostMapping("/calculate") //this needs to be on html so that we can connect it together
     public String processCalculation(WebRequest request, Model model){
     try{
-        String victimId= request.getParameter("victimId");
+        String victimId= request.getParameter("victimName");
         
-        boolean isBodyTempRange= Boolean.parseBoolean(request.getParameter("isBodyTempRange"));
+        boolean isBodyTempRange= request.getParameter("isBodyTempRange")!=null;
 
         double bodyTemp=0.0;
         double bodyMinTemp=0.0;
         double bodyMaxTemp=0.0;
 
         if(isBodyTempRange){
-            bodyMinTemp=Double.parseDouble(request.getParameter("bodyMinTemp"));
-            bodyMaxTemp=Double.parseDouble(request.getParameter("bodyMaxTemp"));
+            bodyMinTemp=Double.parseDouble(request.getParameter("minBodyTemp"));
+            bodyMaxTemp=Double.parseDouble(request.getParameter("maxBodyTemp"));
         }else{
-            bodyTemp=Double.parseDouble(request.getParameter("bodyTemp"));
+            bodyTemp=Double.parseDouble(request.getParameter("singleBodyTemp"));
             bodyMinTemp=bodyTemp;//apply the same terminal logic here
             bodyMaxTemp=bodyTemp;//apply the same terminal logic here
         }
 
-        boolean isAmbientTempRange=Boolean.parseBoolean(request.getParameter("isAmbientTempRange"));
+        boolean isAmbientTempRange=request.getParameter("isAmbientTempRange")!=null;
 
             double ambientTemp=0.0;
             double minAmbientTemp=0.0;
@@ -69,6 +69,9 @@ public class ForensicWebControllerVersion2{
         model.addAttribute("rigorReport", body.getRigorMortisReport());
         model.addAttribute("finalEstimate", body.getFinalEstimateHours());
 
+        /* pass the report back because my html uses thymleaf th:"${report}" */
+        model.addAttribute("report",body.getAlgorMortisReport()+ "\n" + body.getLivorMortisReport() + "\n" + body.getRigorMortisReport());
+
         return "index2";/*thymeleaf will the five labelled attribute created above and inject them in corresponing
         placeholders inside the html file before showing it to the user
         */
@@ -79,5 +82,7 @@ public class ForensicWebControllerVersion2{
     }
 }
 }
+
+
 
 
