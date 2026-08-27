@@ -63,22 +63,22 @@
 
             <div class="form-group">
                 <label>
-                    <input type="checkbox" id="notSureRange" name="isAmbienttempRange" onchange="toggleAmbientRange()">
+                    <input type="checkbox" id="notSureRange" name="isAmbientTempRange" onchange="toggleAmbientRange()">
                     Not sure of the ambient Temperature 
                 </label>
             </div> 
 
             <div class="ambientRange" id="ambientRange" style="display:none;"> 
                 <label for="minAmbient">Minimum Ambient Temperature: </label>
-                <input type="number" step="0.1" id="minAmbient" name="minAmbient" required th:value="${minAmbientTemp}">
+                <input type="number" step="0.1" id="minAmbient" name="minAmbientTemp" required th:value="${minAmbientTemp}">
 
                 <label for="maxAmbient">Maximum Ambient Temperature: </label>
-                <input type="number" step="0.1" id="maxAmbient" name="maxAmbient" required th:value="${maxAmbientTemp}">
+                <input type="number" step="0.1" id="maxAmbient" name="maxAmbientTemp" required th:value="${maxAmbientTemp}">
             </div>
 
             <div id="singleBitchAmbient">
                 <label for="singleAmbient">Ambient Temperature: </label>
-                <input type="number" step="0.1" name="singleAmbient" id="singleAmbient" required th:value="${singleAmbient}">
+                <input type="number" step="0.1" name="ambientTemp" id="singleAmbient" required th:value="${singleAmbient}">
             </div>
 
             <div class="form-group">
