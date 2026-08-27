@@ -269,3 +269,14 @@ pre{
     }
 
 }
+.checkbox-group label {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    cursor: pointer;
+}
+.checkbox-group input[type="checkbox"] {
+    width: auto !important;
+    margin-right: 10px;
+}
+
