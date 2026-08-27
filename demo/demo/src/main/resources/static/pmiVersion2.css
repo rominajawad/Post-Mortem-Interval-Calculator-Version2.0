@@ -12,18 +12,20 @@ body{
     font-family: 'Courier New', Courier, monospace;
 }
 
-.retro-window{
-    background-color: #050a05;
-    width: 420px;
-    height: 420px;
-    border: 3px solid #1ff433;
-    box-shadow: 4px 4px 0px rgba(57, 255, 20, 0.3);
-    border-radius: 4px;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
+.retro-window {
+  background-color: #050a05;
+  width: 500px; /* Widened slightly for better input space */
+  max-height: 85vh; /* Prevents window from extending off screen */
+  border: 3px solid #1ff433;
+  box-shadow: 4px 4px 0px rgba(57, 255, 20, 0.3);
+  border-radius: 4px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* this clean scrollbar if content overflows */
 }
+
 
 .window-header{
     background: linear-gradient(90deg,#2a2a2a,#404040);
@@ -165,23 +167,41 @@ body{
     cursor: pointer;
 }
 
-.form-group{
-    margin-bottom: 15px;
+.form-group {
+  margin-bottom: 20px; /* Increased for better field spacing */
+  padding: 0 20px;    /* Adds side breathing room inside the window */
+  color: #39ff14;     /* Forces text/labels inside to turn terminal green */
+  display: flex;
+  flex-direction: column; /* Stacks the label directly on top of the input */
+  align-items: flex-start;
 }
 
-.label{
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+/* This targets the raw <label> tags inside your form groups */
+.form-group label {
+  color: #39ff14;
+  font-weight: bold;
+  margin-bottom: 8px; /* Adds space between text label and input box */
+  font-size: 14px;
 }
 
-input,select{/*input is textbox, checkbone while select is option boxes*/
-    width: 100%;
-    padding:8px ;
-    border: 1px solid #39ff14;
-    border-radius: 4px;
-    box-sizing: border-box;/*will keep the sizing fixed*/
+
+input, select { /*input is for textboxes, checkboxes and etc. Select is for options*/
+  width: 100%;
+  padding: 10px;
+  background-color: #0d1a0d; /* Dark background inside the field */
+  color: #39ff14; /* Bright green text so you can read what you type */
+  border: 1px solid #39ff14;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
 }
+
+/* Makes fields look sharp when clicking inside them */
+input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 8px #39ff14;
+}
+
 
 button{
     background-color: #39ff14;
