@@ -14,8 +14,8 @@ body{
 
 .retro-window {
   background-color: #050a05;
-  width: 500px; /* Widened slightly for better input space */
-  max-height: 85vh; /* Prevents window from extending off screen */
+  width: 450px;           /* Narrower width to make it compact */
+  height: 450px;          /* Matching height to force an exact square */
   border: 3px solid #1ff433;
   box-shadow: 4px 4px 0px rgba(57, 255, 20, 0.3);
   border-radius: 4px;
@@ -23,7 +23,7 @@ body{
   z-index: 2;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* this clean scrollbar if content overflows */
+  overflow-y: auto;       /* REPLACES hidden: adds scrollbars when needed */
 }
 
 
@@ -48,16 +48,17 @@ body{
     cursor: pointer;
 }
 
-.window-body{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 25px 20px;
-    text-align: center;
-    color: #39ff14;
+.window-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  color: #39ff14;
 }
+
 
 .window-body p{
     font-size: 18px;
@@ -278,5 +279,18 @@ pre{
 .checkbox-group input[type="checkbox"] {
     width: auto !important;
     margin-right: 10px;
+}
+
+/* Custom Retro Scrollbar */
+.retro-window::-webkit-scrollbar {
+  width: 8px;
+}
+.retro-window::-webkit-scrollbar-track {
+  background: #050a05;
+  border-left: 1px solid #1ff433;
+}
+.retro-window::-webkit-scrollbar-thumb {
+  background: #1ff433;
+  border-radius: 2px;
 }
 
