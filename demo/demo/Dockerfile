@@ -22,6 +22,9 @@ RUN mvn clean package -DskipTests
 # Stage 2: Run using Java 25 runtime
 FROM azul/zulu-openjdk:25-jre-latest
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+# This safely finds the main jar and renames it correctly to /app/app.jar
+COPY --from=build /app/target/demo-*.jar /app/app.jar
+
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
