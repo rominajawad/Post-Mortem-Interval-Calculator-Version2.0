@@ -3,192 +3,203 @@
 <head>
     <title>Forensic PMI calculator version 2.0</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/pmiVersion2.css}">
+    <link rel="stylesheet" href="../static/pmiVersion2.css">
     
 </head>
 
 <body>
    
-  <div class="cyber-workplace">
-    <div id="window-alpha" class="retro-window">
-        <div class="window-header">
-            <span class="window-title">Forensic Invigilator</span>
-            <span class="window-close">-</span>
-        </div>
-        <div class="window-body">
-            <h2>EXECUTION OVERRIDE</h2>
-            <p>Launch post mortem protocol</p>
-            <button class="yes-button">Yes</button>
-        </div>
-    </div>
+    <div class="cyber-workplace">
 
-    <!-- The Main Calculator Window -->
-    <div id="window-beta" class="retro-window hidden">
-        <div class="window-header">
-            <span class="window-title">Post Mortem Protocol</span>
-            <span class="window-close">-</span>
-        </div>
-        
-        <div class="window-body" style="display: block; text-align: left;">
-            <p class="headline" style="text-align: center;">Awaiting biometric submissions...</p>
-            <p class="ask" style="text-align: center; margin-bottom: 25px;">Enter the metrics below to run the post mortem analysis report</p>
-            
-            <form th:action="@{/calculate}" method="POST">
-                
-                <!-- Victim Name Row -->
-                <div class="form-group">
-                    <label for="victimName">Victim Name:</label>
-                    <input type="text" id="victimName" name="victimName" required placeholder="e.g: Olly Doe">
-                </div>
-
-                <!-- Body Temp Toggle Checklist Row -->
-                <div class="form-group checkbox-group">
-                    <label>
-                        <input type="checkbox" id="notSure" onchange="toggleTempInput()"> Not sure of body temperature
-                    </label>
-                </div>
-
-                <!-- Hidden Body Temp Range Row -->
-                <div id="rangeInput" class="form-group" style="display: none;">
-                    <label for="minBodyTemp">Minimum Body Temperature:</label>
-                    <input type="number" step="0.1" id="minBodyTemp" name="minBodyTemp" th:value="${minBodyTemp}">
-                    <br><br>
-                    <label for="maxBodyTemp">Maximum Body Temperature:</label>
-                    <input type="number" step="0.1" id="maxBodyTemp" name="maxBodyTemp" th:value="${maxBodyTemp}">
-                </div>
-
-                <!-- Default Single Body Temp Row -->
-                <div id="singleValueInput" class="form-group">
-                    <label for="singleBodyTemp">Body Temperature:</label>
-                    <input type="number" step="0.1" id="singleBodyTemp" name="singleBodyTemp" th:value="${bodyTemperature}">
-                </div>
-
-                <!-- Ambient Temp Toggle Checklist Row -->
-                <div class="form-group checkbox-group">
-                    <label>
-                        <input type="checkbox" id="notSureRange" onchange="toggleAmbientRange()"> Not sure of the ambient Temperature
-                    </label>
-                </div>
-
-                <!-- Hidden Ambient Temp Range Row -->
-                <div id="ambientRange" class="form-group" style="display: none;">
-                    <label for="minAmbient">Minimum Ambient Temperature:</label>
-                    <input type="number" step="0.1" id="minAmbient" name="minAmbient" th:value="${minAmbient}">
-                    <br><br>
-                    <label for="maxAmbient">Maximum Ambient Temperature:</label>
-                    <input type="number" step="0.1" id="maxAmbient" name="maxAmbient" th:value="${maxAmbient}">
-                </div>
-
-                <!-- Default Single Ambient Temp Row -->
-                <div id="singleAmbientInput" class="form-group">
-                    <label for="singleAmbient">Ambient Temperature:</label>
-                    <input type="number" step="0.1" name="singleAmbient" id="singleAmbient" th:value="${singleAmbient}">
-                </div>
-
-                <!-- Livor Color Row -->
-                <div class="form-group">
-                    <label for="livorColor">Livor Color:</label>
-                    <input type="text" id="livorColor" name="livorColor" required placeholder="e.g. Purple">
-                </div>
-
-                <!-- Livor Fixed Dropdown -->
-                <div class="form-group">
-                    <label for="isLivorFixed">Is Livor Fixed:</label>
-                    <select id="isLivorFixed" name="isLivorFixed">
-                        <option value="true">YES</option>
-                        <option value="false">NO</option>
-                    </select>
-                </div>
-
-                <!-- Rigor Stages Dropdowns -->
-                <div class="form-group">
-                    <label for="rigorJaw">Rigor Stage - Jaw</label>
-                    <select id="rigorJaw" name="rigorJaw">
-                        <option value="0">0 - Absent</option>
-                        <option value="1">1 - Minimal/Settling</option>
-                        <option value="2">2 - Moderate/Developing</option>
-                        <option value="3">3 - Fully rigid/Peak</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="rigorArm">Rigor Stage - Arms</label>
-                    <select id="rigorArm" name="rigorArm">
-                        <option value="0">0 - Absent</option>
-                        <option value="1">1 - Minimal/Settling</option>
-                        <option value="2">2 - Moderate/Developing</option>
-                        <option value="3">3 - Fully rigid/Peak</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="rigorLegs">Rigor Stage - Legs</label>
-                    <select id="rigorLegs" name="rigorLegs">
-                        <option value="0">0 - Absent</option>
-                        <option value="1">1 - Minimal/Settling</option>
-                        <option value="2">2 - Moderate/Developing</option>
-                        <option value="3">3 - Fully rigid/Peak</option>
-                    </select>
-                </div>
-
-                <div class="form-group" style="padding-top: 10px;">
-                    <button type="submit" style="width: 100%;">Run Analysis Report</button>
-                </div>
-            </form>
-
-            <!-- Server Output Processing Area -->
-            <div class="result" th:if="${report}">
-                <h2>Analysis Report</h2>
-                <pre th:text="${report}"></pre>
-            </div>
-        </div>
-    </div>
+<div id="window-alpha"  class="retro-window">
+<div class="window-header">
+<span class="Window-title">Forensic Invigilator</span>
+<span class="window-close">-</span>
+</div>
+<div class="window-body">
+    <h2>EXECUTION OVERRIDE</h2>
+    <p>Launch post mortem protocol</p>
+    <button class="yes-button">Yes</button>
+</div>
 </div>
 
+<!--new window goes here-->
+<div id="window-beta" class="retro-window hidden"> 
+<div class="header"><!--this is the header class-->
+    <span class="window-title">Post Mortem Protocol</span><!--span is inline so takes the entire width then having a whole block 
+    to itself-->
+    <span class="window-close">-</span>
+</div><!--end of header class-->
+<p class="headline">Awaiting biometric submissions... </p>
+<p class="ask">Enter the metrics below to run the post mortem analysis report</p>
+
+<form action= "/calculate" method="POST"> <!--connecting to the spring web controller we made-->
+<div class="form-group">
+    <label for="VictimName">Victim Name: </label>
+    <input type="text" id="victimName" name="victimName" required placeholder="e.g: Olly Doe">
+</div>
+
+<!--since thymleaf cannot see what happens when the user clicks yes or no, I would have to do 
+javascript and create a box.-->
+<div class="form-group">
+   <label>
+<input type="checkBox" id="notSure" name="isBodyTempRange" onchange="toggleTempInput()">
+    Not sure of body temperature
+   </label>
+</div>
+
+<!--if they fucking click on that checkbox -->
+<div id="rangeInput" style="display:none;"> <!--since its display is none, its hidden -->
+    <label for="minBodyTemp">Minimum Body Temperature: </label>
+    <input type="number"id="minBodyTemp" name="minBodyTemp" required th:value="${bodyMinTemp}">
+
+    <label for="maxBodyTemp">Maximum Body Temperature: </label>
+    <input type="number"id="maxBodyTemp" name="maxBodyTemp" required th:value="${bodyMaxTemp}">
+
+</div>
+<!--if they know it, they can just type in the number instead of clicking
+the label box will always be present because its style: display is not hidden
+-->
+
+<div id="singleValue">
+<label for="singleBodyTemp"> Body Temperature: </label>
+<input type="number" step="0.1" id="singleBodyTemp" name="singleBodyTemp" required th:value="${bodyTemp}"> 
+</div><!--close the tags immediately after you create one-->
+<!--step: 0.1 is to tell we can have decimal values for temp-->
+<!--end of the body Temp label!-->
+
+
+<!--since ambient temp can also have a range so we can do the same thing-->
+<div class=form-group>
+    <label>
+        <input type="checkBox" id="notSureRange" name="isAmbienttempRange" onchange="toggleAmbientRange()">
+        Not sure of the ambient Temperature 
+    </label>
+</div> <!--the checkbox is completed here-->
+
+<!--first do the yes scenario which is hidden and only appear when you click on the checkboc unlike the single body temp
+label because we dont want it hidden as it is the first priority
+-->
+
+<div class="ambientRange" id="ambientRange" style="display:none;"> <!--since it will be usde by js, use id so thats its unique-->
+    <label for="minAmbient"> Minimum Ambient Temperature: </label>
+    <input type="number" step="0.1" id="minAmbient" name="minAmbient" required th:value="${minAmbientTemp}">
+
+    <label for="maxAmbient"> Maximum Ambient Temperature: </label>
+    <input type="number" step="0.1" id="maxAmbient" name="maxAmbient" required th:value="${maxAmbientTemp}">
+</div>
+
+<div id="singleBitchAmbient">
+<label for="singleAmbient"> Ambient Temperature: </label>
+<input type="number" step="0.1" name="singleAmbient" id="singleAmbient" required th:value="${singleAmbient}">
+</div>
+
+<!--ending of ambient range temp-->
+
+<div class="form-group">
+    <label for="livorColor"> livor Color: </label>
+    <input type="text" id="livorColor" name="livorColor" required placeholder="e.g. Purple">
+</div>
+
+<div class="form-group">
+    <label th:for="isLivorFixed"> is Livor Fixed: </label>
+    <select id="isLivorFixed" name="isLivorFixed">
+        <option value="true">YES</option>
+        <option value="false">NO</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label th:for="rigorJaw"> Rigor Stage - Jaw </label>
+    <select id="rigorJaw" name="rigor0">
+        <option value="0">0 - Absent</option>
+        <option value="1">1 - Minimal/Settling</option>
+        <option value="2">2 - Moderate/Developing</option>
+        <option value="3">3 - Fully rigid/Peak</option>
+        </select>
+</div>
+
+<div class="form-group">
+    <label th:for="rigorArms"> Rigor Stage - Arms </label>
+    <select id="rigorArm" name="rigor1">
+        <option value="0">0 - Absent</option>
+        <option value="1">1 - Minimal/Settling</option>
+        <option value="2">2 - Moderate/Developing</option>
+        <option value="3">3 - Fully rigid/Peak</option>
+        </select>
+</div>
+
+<div class="form-group">
+    <label th:for="rigorLegs"> Rigor Stage - Legs </label>
+    <select id="rigorlegs" name="rigor2">
+    <option value="0">0 - Absent</option>
+    <option value="1">1 - Minimal/Settling</option>
+    <option value="2">2 - Moderate/Developing</option> 
+    <option value="3">3 - Fully rigid/Peak</option>
+    </select>
+</div>
+
+<button type="submit"> Run Analysis Report </button>
+</form>
+
+
+<div class="result" th:if="${report}">
+    <h2>Analysis Report </h2>
+    <pre th:text="${report}">
+    </pre>
+
+</div><!--end of the whole window-->
+</div><!--end of master class-->
+
+
 <script>
-    // Cleaned up, bug-free Interactive View Functions
-    function toggleAmbientRange() {
-        var isChecked = document.getElementById("notSureRange").checked;
-        var ambientRangeDiv = document.getElementById("ambientRange");
-        var ambientSingleDiv = document.getElementById("singleAmbientInput");
-        
-        if (isChecked) {
-            ambientRangeDiv.style.display = "block";
-            ambientSingleDiv.style.display = "none";
-        } else {
-            ambientRangeDiv.style.display = "none";
-            ambientSingleDiv.style.display = "block";
-        }
-    }
+function toggleAmbientRange(){//starting of ambient range js
+    var notSure=document.getElementById("notSureRange").checked;
+    var ambientRange=document.getElementById("ambientRange");
+    var ambientSingle=document.getElementById("singleBitchAmbient");
 
-    function toggleTempInput() {
-        var isChecked = document.getElementById("notSure").checked;
-        var rangeDiv = document.getElementById("rangeInput");
-        var singleDiv = document.getElementById("singleValueInput");
-        
-        if (isChecked) {
-            rangeDiv.style.display = "block";
-            singleDiv.style.display = "none";
-        } else {
-            rangeDiv.style.display = "none";
-            singleDiv.style.display = "block";
-        }
+    if(notSure){
+        ambientRange.style.display="block";//if range show the range label
+        ambientSingle.style.display="none";
+    }else{
+        ambientRange.style.display="none";
+        ambientSingle.style.display="block";
     }
+}//end of ambient range js
 
-    // Window Transition Core Animation Script
-    document.querySelector('.yes-button').addEventListener('click', () => {
-        const alpha = document.getElementById('window-alpha');
-        const beta = document.getElementById('window-beta');
-        
-        alpha.classList.add('exit-minimize');
-        alpha.addEventListener('animationend', () => {
-            alpha.style.display = 'none';
-            beta.classList.remove('hidden');
-            beta.classList.add('entry-zoom');
-        }, {once: true});
-    });
+
+
+function toggleTempInput(){//this js is for body temp
+var isNotSure=document.getElementById("notSure").checked;
+var rangeDiv= document.getElementById("rangeInput");
+var singleDiv=document.getElementById("singleValue");
+
+if(isNotSure){
+    rangeDiv.style.display="block";//show
+    singleDiv.style.display="none";//hide
+}else{
+    rangeDiv.style.display="none";//show
+    singleDiv.style.display="block";//hide
+}
+}//end of body temp js
+
+//this is for minimizing and opening style
+document.querySelector('.yes-button').addEventListener('click', () => {//this tells that when they select yes, add an action
+const alpha=document.getElementById('window-alpha');//look up the id of the first window and save it in const var called alpha
+const beta=document.getElementById('window-beta');//look up the seconf window by its id number we had and save it in var called beta
+
+//fire out the minimize effect in the first window
+alpha.classList.add('exit-minimize');//add the css style exit minimize to old window, making old window shrink down
+
+//tell the browser to wait for the animation to stop before it does the second one
+alpha.addEventListener('animationend', () => {//tells the browser to wait and listen for old css style to end before doing the next one
+alpha.style.display='none';//when animation is done, it is hidden from the webpage completely
+beta.classList.remove('hidden');//remove the hidden css class from new window beta, making it ready to be seen in page
+beta.classList.add('entry-zoom');//fires the css style to the new window
+},{once: true})//tells the browser to delete animationed listener right after it runs one single time to remove wastage of space
+
+});
 </script>
-
 
 </body>
 </html>
