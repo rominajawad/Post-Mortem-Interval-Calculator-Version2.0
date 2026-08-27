@@ -52,13 +52,28 @@ body{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  /* CHANGE THIS: Centers elements vertically on your landing page */
+  justify-content: center; 
+  align-items: center;
+  padding: 30px;
+  color: #39ff14;
+  overflow-y: auto;
+  text-shadow: 0 0 4px rgba(57, 255, 20, 0.5);
+  box-sizing: border-box;
+}
+
+/* Force elements inside your landing page to spread out with breathing room */
+#window-alpha .window-body * {
+  margin: 15px 0; 
+}
+
+/* This overrides the alignment ONLY for your second window (the form) 
+   so your input elements still stack from the top down correctly! */
+#window-beta .window-body {
   justify-content: flex-start;
   align-items: stretch;
-  padding: 20px;
-  color: #39ff14;
-  overflow-y: auto;       /* Internal scrolling ensures no fields break layout boundaries */
-  text-shadow: 0 0 4px rgba(57, 255, 20, 0.5);
 }
+
 
 
 .retro-window::before {
