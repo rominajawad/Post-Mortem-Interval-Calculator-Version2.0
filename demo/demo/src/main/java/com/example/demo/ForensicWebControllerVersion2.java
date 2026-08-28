@@ -71,7 +71,6 @@ public class ForensicWebControllerVersion2{
 
         /* pass the report back because my html uses thymleaf th:"${report}" */
         model.addAttribute("report", body.getPostMortemReport());
-        model.addAttribute("showBeta", true);
         return "index2";/*thymeleaf will the five labelled attribute created above and inject them in corresponing
         placeholders inside the html file before showing it to the user
         */
