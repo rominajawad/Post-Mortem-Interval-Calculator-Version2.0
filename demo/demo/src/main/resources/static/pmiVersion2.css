@@ -39,8 +39,15 @@ body {
     background-color: #020502;
 
     background-image:
-        linear-gradient(rgba(31, 244, 51, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(31, 244, 51, 0.03) 1px, transparent 1px);
+        linear-gradient(
+            rgba(31, 244, 51, 0.03) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(31, 244, 51, 0.03) 1px,
+            transparent 1px
+        );
 
     background-size: 20px 20px;
 }
@@ -58,14 +65,15 @@ body {
 
     border-radius: 4px;
 
+    position: relative;
+
     display: flex;
     flex-direction: column;
 
-    position: relative;
-
     overflow: hidden;
-}
 
+    z-index: 2;
+}
 
 /* =========================================================
    CRT SCANLINES
