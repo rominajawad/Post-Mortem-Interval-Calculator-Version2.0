@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Error page</title>
+        <style>
+            /*fuck I hate styling, that shit is the only hard shit here*/
+            html, body{
+                background-color: bisque;
+                margin: 0;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .whole-error-box{
+                width: 450px;
+                height: auto;
+                box-shadow: 4px 4px 4px 0 #1a1a1a;
+                min-height: 180px;
+                box-sizing: border-box;
+                background-color: #ffffff;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .top-bar{
+                width: 100%;
+                height: auto;
+                border-bottom: 2px solid #1a1a1a;
+                display: flex;
+                justify-content: space-between;
+                align-content: center;
+                box-sizing: border-box;
+               padding: 4px 12px;
+            }
+
+            .fuck{
+                margin: 0;
+                font-weight: bold;
+                font-family: 'Courier New', Courier, monospace;
+            }
+
+            .x{
+                margin: 0;
+                background: none;
+                border: none;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .center{
+                display: flex;
+                margin: 0;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                flex-grow: 1;
+                box-sizing: border-box;
+
+            }
+
+            .message{
+                margin:0;
+                width: 200px;
+                height: 60px;
+                border: 3px solid #1a1a1a;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                letter-spacing: 2px;
+                
+            }
+
+
+
+        </style>
+    </head>
+
+    <body>
+        <div class="whole-error-box"><!--this is the whole fucking error box, things go inside it-->
+            <div class="top-bar"><!--this is the top line where x button will be placed-->
+                <p class="fuck">DAMN</p><!--this is the message on the top left hand-->
+                <button class="x">X</button><!--this is the button on the top right-->
+            </div><!--this is the end of the top line where x button and everything will be placed-->
+            <div class="center">
+                <p class="message">ERROR</p><!--this will be the huge message placed in a box centered in the error page-->
+            </div>
+        </div><!--this is the closing tag of the fucking error box-->
+
+
+
+    </body>
+
+</html>
