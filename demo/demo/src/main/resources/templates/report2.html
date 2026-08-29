@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PMO Report</title>
+    <meta charset="UTF-8">
+
+    <style>
+        *{/* * means every html element, like div, body, h2, pre, span (for the one we specified) */
+            box-sizing: border-box;/*it tells that whatever width we specify it stays inside that and doesnt exceed*/
+        }
+        body{/*this is the body of the page*/
+            margin: 0;/*be default it leaves white places so by saying this we are removing default white spaces*/
+            min-height: 100vh;/*this means that if 100% of the screen's height*/
+            background-color: #020602;
+            font-family: 'Courier New', Courier, monospace;
+            color: #39ff14;
+        }
+
+        .cyber-workplace{
+            min-height: 100vh;
+            display: flex;/*default is set to none*/
+            justify-content: center;/*put the stuff inside it at the center of the main axis*/
+            align-items: center;/*align items inside it to horizontal center*/
+            padding: 2rem;/*based on the size of the font*/
+        }
+
+        .window-header{
+            display: flex;/*since it has two children: close and title, we need to take care of them by having a box for it*/
+            justify-content: space-between;/*this means put each of them at the extreme corner*/
+            align-items: center;
+            padding: 0.6rem 0.8rem;/*top bottom, left right. This basically means calc according to font(16 by default) so 16*0.6 from top, bottom and same for other*/
+            background: linear-gradient(
+                90deg,/*set the direction*/
+                #292929,
+                #404040
+            );
+            border-bottom: 2px solid #39ff14;/*this sets the border at the bottom*/
+            color: #39ff14;/*color of text*/
+            font-weight: bold;
+        }
+
+        .report-window{
+            width: min(90vw,85vw);/*it goes up to 85, it selects the min one so that width doesnt exceed it */
+            max-width: 85vh;
+            display: flex;/*because it has two children: header and body*/
+            flex-direction: column;/*we wanna display it vertically*/
+            background-color: #050a05;
+            border: 3px solid #39ff14;
+            border-radius: 4px;/*how rounded the edges are gonna be*/
+            box-shadow: 4px 4px 0 rgba(57, 255, 20, 0.3);/*first value is hor, the sec is ver and third is blur. The last val of rgba is opacity so it is 30% of 
+            opacity. 1 is completely opaque and 0 is not invisible*/
+            overflow: hidden;/*if anything goes out of the box, hide it*/
+        }
+
+        .window-title{
+            color:#39ff14;
+        }
+
+        .window-close{
+            padding: 0 0.4rem;
+            border: 1px solid #39ff14;
+            background-color: #1a1a1a;
+            color: #39ff14;
+        }
+
+        /*everyhting underneath the header*/
+        .body{
+            flex:1;/*give the remaining space to it*/
+            padding: clamp(1rem, 3vw, 2rem);/*min, pref, max. the min should be 1rem, preferred is 3vw and never go beyond 2rem*/
+            overflow-y: auto;/*if it becomes to tall, have a scrollbar to it. Auto here means when the scrollbar is necessary, y is height*/
+        }
+
+        .window-body h2{
+            margin-top:0;/*removes the default white space from top, of the page as margin it out*/
+            color: #39ff14;
+            font-size:clamp(1.5rem, 4vw, 2.5rem);/*min, pref and max and it changes based on the scenario*/
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px rgba(57,255,20,0.6);/*hor ver blur effect(color, op). it means glow around the text*/
+        }
+
+        .window-body pre{
+            margin: 0;/*remove browser's default spaces around pre*/
+            padding: 1rem;/*create the space around the text box, relative to the font size*/
+            background-color: #020502;
+            border-left: 3px solid #39ff14;
+            color: ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            line-height: 1.5;/*vertical space between lines of etxt, but since it has no unit it acts like a multiplier*/
+            white-space: pre-wrap; /*preserve the formatting but allow long lines to wrap. white-space are invisible space, pre is formatted and wrap is text wrapping*/
+            overflow-wrap: anywhere;/*if the lines gets too long than wrap it so it doesnt overflow out of the container. anywhere is any literal char pos*/
+        }
+        /*scrollbar section*/
+        .window-body::-webkit-scrollbar{/*style the scrollbar belonging to window body. this is a pseudo element for scrollbar in webkit based browser*/
+            width:8px;/*make the scrollbar 8px wide*/
+        }
+
+        /*scrollbar background*/
+        .window-body::-webkit-scrollbar-track{/*track is background*/
+            background-color: #050a05;
+        }
+
+        .window-body::-webkit-scrollbar-thumb{/*dragging part of it*/
+            background-color: #39ff14;/*color of it*/
+            border-radius: 2rem;/*slightly rounding it*/
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div class="cyber-workplace">
+    <div class="retro-window report-window">
+        <span class="window-title">Forensic Analysis report</span>
+        <span class="window-close">-</span>
+    </div>
+    <div class="window-body">
+        <h2>ANALYSIS REPORT</h2>
+        <pre th:text="${report}"></pre>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>
