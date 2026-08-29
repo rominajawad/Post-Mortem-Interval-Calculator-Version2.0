@@ -16,7 +16,8 @@
          WINDOW ALPHA
          Initial execution screen
          ========================= -->
-    <div id="window-alpha" class="retro-window">
+    <div id="window-alpha" class="retro-window"
+        th:if="${report==null}">
         
 
         <div class="window-header">
@@ -43,7 +44,8 @@
          WINDOW BETA
          Post mortem calculator
          ========================= -->
-    <div id="window-beta" class="retro-window hidden">
+    <div id="window-beta" class="retro-window hidden"
+        th:class="${report==null} ? 'retro-window hidden' : 'retro-window' ">
 
         <div class="window-header">
             <span class="window-title">Post Mortem Protocol</span>
