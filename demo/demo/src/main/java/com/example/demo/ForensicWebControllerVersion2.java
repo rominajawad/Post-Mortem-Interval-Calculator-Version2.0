@@ -12,7 +12,7 @@ public class ForensicWebControllerVersion2{
      accessed by springboot and return type is string (name of html frontend file)
     */
     public String homePage(){
-        return "report2"; // name of the html file here you create and would return like normal return value
+        return "index2"; // name of the html file here you create and would return like normal return value
     }
 
     @PostMapping("/calculate") //this needs to be on html so that we can connect it together
