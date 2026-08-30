@@ -26,7 +26,7 @@
         }
 
          .report-window{
-            width: min(90vw,85vw);/*it goes up to 85, it selects the min one so that width doesnt exceed it */
+            width: min(90vw,85px);/*it goes up to 85, it selects the min one so that width doesnt exceed it */
             max-width: 85vh;
             display: flex;/*because it has two children: header and body*/
             flex-direction: column;/*we wanna display it vertically*/
@@ -84,7 +84,7 @@
             padding: 1rem;/*create the space around the text box, relative to the font size*/
             background-color: #020502;
             border-left: 3px solid #39ff14;
-            color: ffffff;
+            color: #ffffff;
             font-family: 'Courier New', Courier, monospace;
             font-size: clamp(0.8rem, 1.5vw, 1rem);
             line-height: 1.5;/*vertical space between lines of etxt, but since it has no unit it acts like a multiplier*/
@@ -113,13 +113,13 @@
 <body>
 <div class="cyber-workplace">
     <div class="retro-window report-window">
+        <div class="window-header">
         <span class="window-title">Forensic Analysis report</span>
         <span class="window-close">-</span>
     </div>
     <div class="window-body">
         <h2>ANALYSIS REPORT</h2>
-        <pre th:text="${report}"></pre>
-
+        <pre th:text="${report}"></pre> 
     </div>
 </div>
 
