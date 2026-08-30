@@ -25,8 +25,8 @@
             padding: 2rem;/*based on the size of the font*/
         }
 
-         .report-window{
-            width: min(90vw,85px);/*it goes up to 85, it selects the min one so that width doesnt exceed it */
+         .retro-window{
+            width: min(90vw,85vw);/*it goes up to 85, it selects the min one so that width doesnt exceed it */
             max-width: 85vh;
             display: flex;/*because it has two children: header and body*/
             flex-direction: column;/*we wanna display it vertically*/
@@ -38,7 +38,7 @@
             overflow: hidden;/*if anything goes out of the box, hide it*/
         }
         
-       .report-window .window-header{
+       .window-header{
             display: flex;/*since it has two children: close and title, we need to take care of them by having a box for it*/
             justify-content: space-between;/*this means put each of them at the extreme corner*/
             align-items: center;
@@ -53,11 +53,11 @@
             font-weight: bold;
         }
 
-        .report-window .window-title{
+        .window-title{
             color:#39ff14;
         }
 
-        .report-window .window-close{
+      .window-close{
             padding: 0 0.4rem;
             border: 1px solid #39ff14;
             background-color: #1a1a1a;
@@ -65,7 +65,7 @@
         }
 
         /*everyhting underneath the header*/
-        .report-window .window-body{
+        .window-body{
             flex:1;/*give the remaining space to it*/
             padding: clamp(1rem, 3vw, 2rem);/*min, pref, max. the min should be 1rem, preferred is 3vw and never go beyond 2rem*/
             overflow-y: auto;/*if it becomes to tall, have a scrollbar to it. Auto here means when the scrollbar is necessary, y is height*/
